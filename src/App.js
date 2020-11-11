@@ -1,18 +1,14 @@
-import './App.css';
-import MuithemeProvide from '@material-ui/core/styles/MuiThemeProvider';
+import React from 'react';
+import { ThemeProvider as MuithemeProvider } from '@material-ui/core/styles';
 import theme from './theme/theme';
-import { TextField, Button } from '@material-ui/core';
+import RegistrarUsuario from './components/security/RegistrarUsuario';
 
 function App() {
     return (
-        <MuithemeProvide theme={theme}>
-            <h1>Proyecto en blanco</h1>
-            <TextField variant="outlined"/>
-            <Button variant="contained" color="primary">
-                Mi Button Material Design
-            </Button>
-        </MuithemeProvide>
-    )
+        <MuithemeProvider theme={theme}>
+            <RegistrarUsuario />
+        </MuithemeProvider>
+    );
 }
 
 export default App;

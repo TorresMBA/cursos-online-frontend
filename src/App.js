@@ -8,7 +8,7 @@ import PerfilUsuario from './components/security/PerfilUsuario';
 function App() {
     return (
         <MuithemeProvider theme={theme}>
-            <PerfilUsuario />
+            <RegistrarUsuario />
         </MuithemeProvider>
     );
 }

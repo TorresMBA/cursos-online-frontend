@@ -16,6 +16,16 @@ const style = {
     },
     submit: {
         marginTop: 15
+    },
+    avatar: {
+        margin: 5,
+        backgroundColor: "#1976d2",
+        width: 60,
+        height: 60
+    },
+    icon: {
+        //Tamaño a la imagen del icono
+        fontSize: 40
     }
 };
 

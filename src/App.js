@@ -2,11 +2,12 @@ import React from 'react';
 import { ThemeProvider as MuithemeProvider } from '@material-ui/core/styles';
 import theme from './theme/theme';
 import RegistrarUsuario from './components/security/RegistrarUsuario';
+import Login from './components/security/Login';
 
 function App() {
     return (
         <MuithemeProvider theme={theme}>
-            <RegistrarUsuario />
+            <Login />
         </MuithemeProvider>
     );
 }

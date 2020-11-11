@@ -20,7 +20,7 @@ const RegistrarUsuario = () => {
                     <Grid container spacing={2}>
                         <Grid item xs={12} md={6}>
                             {/*cada variant tiene difenrete estilo en la caja de texto*/}
-                            <TextField name="nombre" variant="outlined" fullWidth label="Ingrese su nomnbre"/>
+                            <TextField name="nombre" variant="outlined" fullWidth label="Ingrese su nombre"/>
                         </Grid>
                         <Grid item xs={12} md={6}>
                             <TextField name="apellidos" variant="standard" fullWidth label="Ingrese sus Apellidos"/>

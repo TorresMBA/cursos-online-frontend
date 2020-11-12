@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import style from '../Tools/Style';
 import {Button, Container, Grid, TextField, Typography} from '@material-ui/core';
-import { obtenerUsuarioActual,actualizarUsuario } from '../../actions/UsuarioAction';
+import { obtenerUsuarioActual, actualizarUsuario } from '../../actions/UsuarioAction';
 
 const PerfilUsuario = () => {
     const [usuario, setUsuario] = useState({
-        nombreCompleto: '',
+        nombre: '',
+        apellidos:'',
         email: '',
         password: '',
         confirmarPassword: '',
@@ -27,9 +28,10 @@ const PerfilUsuario = () => {
         });
     }, [])
 
-    const actualizarUsuario = (e) => {
+    const guardarUsuario = e => {
         e.preventDefault();
         actualizarUsuario(usuario).then(response => {
+            console.log('Se Actualizo el usuario', usuario);
             window.localStorage.setItem("token_seguridad", response.data.token);
         })
     }
@@ -45,10 +47,10 @@ const PerfilUsuario = () => {
             <form style={style.form} >
                 <Grid container spacing={2} >
                     <Grid item xs={12} md={6}>
-                        <TextField name="nombreCompleto" value={usuario.nombreCompleto} onChange={ingresarValoresMemoria} variant="outlined" fullWidth label="Ingrese Nombre"/>
+                        <TextField name="nombre" value={usuario.nombre} onChange={ingresarValoresMemoria} variant="outlined" fullWidth label="Ingrese Nombre"/>
                     </Grid>
                     <Grid item xs={12} md={6}>
-                            <TextField name="nombreCompleto" value={usuario.nombreCompleto} onChange={ingresarValoresMemoria} variant="outlined" fullWidth label="Ingrese sus Apellidos"/>
+                            <TextField name="apellidos" value={usuario.apellidos} onChange={ingresarValoresMemoria} variant="outlined" fullWidth label="Ingrese sus Apellidos"/>
                         </Grid>
                     <Grid item xs={12} md={6}>
                         <TextField name="email" value={usuario.email} onChange={ingresarValoresMemoria} variant="outlined" fullWidth label="Ingrese email"/>
@@ -65,7 +67,7 @@ const PerfilUsuario = () => {
                 </Grid>
                 <Grid container justify="center">
                     <Grid item xs={12} md={6}>
-                        <Button type="submit" onClick={actualizarUsuario} fullWidth variant="contained" size="large" color="primary" style={style.submit}>
+                        <Button type="submit" onClick={guardarUsuario} fullWidth variant="contained" size="large" color="primary" style={style.submit}>
                             Guardar Datos
                         </Button>
                     </Grid>

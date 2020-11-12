@@ -8,3 +8,21 @@ export const registrarUsuario = usuario => {
                     })
     })
 }
+
+export const obtenerUsuarioActual = () => {
+    return new Promise((resolve, ejecet) => {
+        HttpCliente.get('/Usuario')
+                    .then(response => {
+                        resolve(response);
+                    })
+    })
+}
+
+export const actualizarUsuario = usuario => {
+    return new Promise( (resolve, eject) => {
+        HttpCliente.put('/Usuario', usuario)
+                    .then(response => {
+                        resolve(response);
+                    })
+    })
+}

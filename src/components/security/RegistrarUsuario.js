@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Container, Typography, Grid, TextField, Button } from '@material-ui/core';
 import style from '../Tools/Style';
+import { registrarUsuario } from '../../actions/UsuarioAction';
 
 const RegistrarUsuario = () => {
     const [usuario, setUsuario] = useState({
@@ -21,9 +22,11 @@ const RegistrarUsuario = () => {
         }))
     }
 
-    const registrarUsuario = e => {
+    const registrarUsuarioBoton = e => {
         e.preventDefault();
-        console.log('Valores en memoria temporal del usuario: ', usuario);
+        registrarUsuario(usuario).then(response => {
+            window.localStorage.setItem("token_seguridad", response.data.token);
+        })
     }
 
     return (
@@ -43,7 +46,7 @@ const RegistrarUsuario = () => {
                     <Grid container spacing={2}>
                         <Grid item xs={12} md={6}>
                             {/*cada variant tiene difenrete estilo en la caja de texto*/}
-                            <TextField name="Nombres" value={usuario.Nombre} onChange={ingresarValoresMemoria} variant="outlined" fullWidth label="Ingrese su nombre"/>
+                            <TextField name="Nombre" value={usuario.Nombre} onChange={ingresarValoresMemoria} variant="outlined" fullWidth label="Ingrese su nombre"/>
                         </Grid>
                         <Grid item xs={12} md={6}>
                             <TextField name="Apellidos" value={usuario.Apellidos} onChange={ingresarValoresMemoria} variant="standard" fullWidth label="Ingrese sus Apellidos"/>
@@ -63,7 +66,7 @@ const RegistrarUsuario = () => {
                     </Grid>
                     <Grid container justify="center">
                         <Grid item xs={12} md={6}>
-                            <Button type="submit" onClick={registrarUsuario} fullWidth variant="contained" color="primary" size="large" style={style.submit}>
+                            <Button type="submit" onClick={registrarUsuarioBoton} fullWidth variant="contained" color="primary" size="large" style={style.submit}>
                                 Enviar
                             </Button>
                         </Grid>

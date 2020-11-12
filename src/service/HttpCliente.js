@@ -2,7 +2,7 @@
 import axios from 'axios';
 
 //Indicar el endpoint base sobre la cual estan correiendo nuestros web services
-axios.defaults.baseURL = 'http://localhost:5000/api/';
+axios.defaults.baseURL = 'http://localhost:5000/api';
 
 //Crear un objeto generico que represente lo request que enviamos al servidor
 const requestGenerico = {

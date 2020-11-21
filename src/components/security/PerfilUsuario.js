@@ -2,8 +2,11 @@ import React, { useEffect, useState } from 'react';
 import style from '../Tools/Style';
 import {Button, Container, Grid, TextField, Typography} from '@material-ui/core';
 import { obtenerUsuarioActual, actualizarUsuario } from '../../actions/UsuarioAction';
+import { useStateValue } from '../../context/store';
 
 const PerfilUsuario = () => {
+    const [{ sesionUsuario }, dispatch] = useStateValue();
+
     const [usuario, setUsuario] = useState({
         nombre: '',
         apellidos:'',
@@ -22,7 +25,7 @@ const PerfilUsuario = () => {
     }
 
     useEffect( () => {
-        obtenerUsuarioActual().then(response => {
+        obtenerUsuarioActual(dispatch).then(response => {
             console.log('Data del Objeto response del Usuario Actual', response);
             setUsuario(response.data);
         });

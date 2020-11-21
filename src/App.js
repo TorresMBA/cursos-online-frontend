@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { ThemeProvider as MuithemeProvider } from '@material-ui/core/styles';
 import theme from './theme/theme';
 import RegistrarUsuario from './components/security/RegistrarUsuario';
@@ -7,11 +7,27 @@ import PerfilUsuario from './components/security/PerfilUsuario';
 import { BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 import { Grid } from '@material-ui/core';
 import AppNavBar from './components/navigation/AppNavBar';
+import { useStateValue } from './context/store';
+import { obtenerUsuarioActual } from './actions/UsuarioAction';
 //Router es un enrutador
 //Switch es el que redirige a que componente te estas refierendo
 //Route es la ruta del componente que se va a cargar
 
 function App() {
+    const [{ sesionUsuario }, dispatch] = useStateValue();
+
+    const [iniciaApp, setInicialApp] = useState(false);
+
+    useEffect(() => {
+        if(!iniciaApp){
+            obtenerUsuarioActual(dispatch).then(response => {
+                setInicialApp(true);
+            }).catch(error => {
+                setInicialApp(true);
+            });
+        }
+    }, [iniciaApp])
+
     return (
         <Router>
             <MuithemeProvider theme={theme}>

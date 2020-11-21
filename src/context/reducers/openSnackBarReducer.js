@@ -10,7 +10,7 @@ const openSnackBarReducer = (state = initialState, action) => {
                 ...state,
                 open: action.openMensaje.open,
                 mensaje: action.openMensaje.mensaje
-            }
+            };
     
         default:
             return state;

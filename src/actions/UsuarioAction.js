@@ -29,6 +29,9 @@ export const actualizarUsuario = usuario => {
                     .then(response => {
                         resolve(response);
                     })
+                    .catch(error => {
+                        resolve(error.response);
+                    });
     })
 }
 

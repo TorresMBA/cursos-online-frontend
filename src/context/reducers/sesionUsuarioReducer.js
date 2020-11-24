@@ -1,4 +1,4 @@
-//el reduces tiene 3 partes
+//Los reducers tiene 3 partes
 /*
     1 Los valores que va a almacenar 
     2 La logica que va a ejecuta dependiendo al usuario que quiera hacer

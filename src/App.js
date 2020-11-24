@@ -30,7 +30,7 @@ function App() {
         }
     }, [iniciaApp])
 
-    return (
+    return iniciaApp === false ? null : (
         //Porque agregar <React.Fragment> lo que pasa es que cada vez que defines el html de un componente react 
         //Solo se puede colocar un solo componenete, dentro de este componente de tipo dom virtual anidas los siguientes componente
         //no puedes puedes cologar por ejemplo dentro return dos objetos de tipo dom virtual porque da errores 

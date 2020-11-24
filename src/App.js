@@ -9,6 +9,7 @@ import { Grid, Snackbar } from '@material-ui/core';
 import AppNavBar from './components/navigation/AppNavBar';
 import { useStateValue } from './context/store';
 import { obtenerUsuarioActual } from './actions/UsuarioAction';
+import RutaSegura from './components/navigation/RutaSegura';
 //Router es un enrutador
 //Switch es el que redirige a que componente te estas refierendo
 //Route es la ruta del componente que se va a cargar
@@ -62,8 +63,17 @@ function App() {
                         <Switch>
                             <Route exact path="/auth/login" component={Login}/>
                             <Route exact path="/auth/registrar" component={RegistrarUsuario}/>
-                            <Route exact path="/auth/perfil" component={PerfilUsuario}/>
-                            <Route exact path="/" component={PerfilUsuario}/>
+                            <RutaSegura 
+                                exact
+                                path="/auth/perfil"
+                                component={PerfilUsuario}
+                            />
+                            
+                            <RutaSegura
+                                exact
+                                path="/"
+                                component={PerfilUsuario}
+                            /> 
                         </Switch>
                     </Grid>
                 </MuithemeProvider>

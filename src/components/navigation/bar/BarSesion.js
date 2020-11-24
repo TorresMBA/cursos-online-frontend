@@ -70,6 +70,11 @@ const BarSesion = (props) => {
         //Para este caso salir de sesion es porque el token no existe, al borrar el token del browser
         //que representa la sesion del usuario automaticamente signifcara que saliste sesion
         localStorage.removeItem('token_seguridad');
+        dispatch({
+            type:"SALIR_SESION",
+            nuevoUsuario: null,
+            autenticado: false
+        });
         props.history.push('/auth/login');
     }
 
@@ -102,7 +107,7 @@ const BarSesion = (props) => {
                 <Typography variant="h6">Cursos Online</Typography>
                 <div className={classes.grow}></div>
                 <div className={classes.seccionDesktop}>
-                    <Button color="inherit">
+                    <Button color="inherit" onClick={salirSesionApp}>
                         Salir
                         </Button>
                     <Button color="inherit">

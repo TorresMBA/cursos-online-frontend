@@ -10,6 +10,7 @@ import AppNavBar from './components/navigation/AppNavBar';
 import { useStateValue } from './context/store';
 import { obtenerUsuarioActual } from './actions/UsuarioAction';
 import RutaSegura from './components/navigation/RutaSegura';
+import NuevoCurso from './components/Cursos/NuevoCurso';
 //Router es un enrutador
 //Switch es el que redirige a que componente te estas refierendo
 //Route es la ruta del componente que se va a cargar
@@ -74,6 +75,12 @@ function App() {
                                 path="/"
                                 component={PerfilUsuario}
                             /> 
+
+                            <RutaSegura
+                                exact
+                                path="/curso/nuevo"
+                                component={NuevoCurso}
+                            />
                         </Switch>
                     </Grid>
                 </MuithemeProvider>

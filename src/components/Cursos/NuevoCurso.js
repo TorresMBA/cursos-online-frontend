@@ -6,8 +6,12 @@ import DateFnsUtils from '@date-io/date-fns';
 import ImageUploader from 'react-images-upload';
 import {v4 as uuidv4} from 'uuid';
 import { ObtenerDataImagen } from '../../actions/ImagenAction';
+import {guardarCurso} from '../../actions/CursoAction';
+import {useStateValue} from '../../context/store';
 
 const NuevoCurso = () => {
+    const [{},dispatch] = useStateValue();
+
     //variable de estado local para que almacene la fecha
     const [fechaSeleccionada, setFechaSelecionada] = useState(new Date());
 
@@ -19,6 +23,17 @@ const NuevoCurso = () => {
         precio: 0.0,
         promocion: 0.0
     });
+
+    const resetarForm = () => {
+        setFechaSelecionada(new Date());
+        setImagenCurso(null);
+        setCurso({
+            titulo: '',
+            descripcion: '',
+            precio: 0.0,
+            promocion: 0.0
+        });
+    }
 
     //Lo que el usuario ingrese dentro de las cajas de texto van a entrar a la memoria js 
     //por eso creo este metodo para que capture esos valores y las convierta en varaibles locales de estado
@@ -40,6 +55,64 @@ const NuevoCurso = () => {
         });
     }
 
+    const guardarCursoBotton = e =>{
+        e.preventDefault();
+        //Se crea Id para que represente al curso
+        //va a viajar tanto para objetocurso como para imagencurso
+        const cursoId = uuidv4();
+
+        const objetoCurso = {
+            titulo: curso.titulo,
+            descripcion: curso.descripcion,
+            promocion: parseFloat(curso.promocion || 0.0),
+            precio: parseFloat(curso.precio || 0.0),
+            fechaPublicacion: fechaSeleccionada,
+            cursoId: cursoId
+        };
+        
+        let objetoImagen = null;
+
+        if(imagenCurso){
+            objetoImagen = {
+                nombre : imagenCurso.nombre,
+                data : imagenCurso.data,
+                extension: imagenCurso.extension,
+                objetoReferencia: cursoId
+            }
+        }
+
+        guardarCurso(objetoCurso, objetoImagen)
+            .then(respuesta => {
+                //console.log("Respuesta arreglo", respuesta);
+                const reponseCurso = respuesta[0];
+                const responseImagen = respuesta[1];
+                let mensaje = "";
+                
+                if(reponseCurso.status === 200){
+                    mensaje += "Se guardo existosamente el curso"
+                    resetarForm();
+                }else{
+                    mensaje += "Errores: " + Object.keys(reponseCurso.response.data.errors);
+                }
+
+                if(responseImagen){
+                    if(responseImagen.status === 200){
+                        mensaje += ", Se guardo la imagen correctamente"
+                    }else{
+                        mensaje += ", Errores en imagen: " + Object.keys(responseImagen.response.data.errors);
+                    }
+                }
+
+                dispatch({
+                    type:"OPEN_SNACKBAR",
+                    openMensaje: {
+                        open: true,
+                        mensaje: mensaje
+                    }
+                });
+            });
+    }
+
     const fotokey = uuidv4();
 
     return (
@@ -56,7 +129,7 @@ const NuevoCurso = () => {
                                     variant="outlined"
                                     fullWidth
                                     label="Ingrese Titulo"
-                                    value={curso.titulo}
+                                    value={curso.titulo  || " "}
                                     onChange={ingresarValoresMemoria}
                         />
                     </Grid>
@@ -65,7 +138,7 @@ const NuevoCurso = () => {
                                     variant="outlined"
                                     fullWidth
                                     label="Descripcion"
-                                    value={curso.descripcion}
+                                    value={curso.descripcion  || " "}
                                     onChange={ingresarValoresMemoria}
                         />
                     </Grid>
@@ -74,7 +147,7 @@ const NuevoCurso = () => {
                                     variant="outlined"
                                     fullWidth
                                     label="Ingrese Precio normal"
-                                    value={curso.precio}
+                                    value={curso.precio  || " "}
                                     onChange={ingresarValoresMemoria}
                         />
                     </Grid>
@@ -83,14 +156,14 @@ const NuevoCurso = () => {
                                     variant="outlined"
                                     fullWidth
                                     label="Ingrese Precio promocion"
-                                    value={curso.promocion}
+                                    value={curso.promocion  || " "}
                                     onChange={ingresarValoresMemoria}
                         />
                     </Grid>
                     <Grid item xs={12} md={6}>
                         <MuiPickersUtilsProvider utils={DateFnsUtils}>
                             <KeyboardDatePicker 
-                                value={fechaSeleccionada}
+                                value={fechaSeleccionada  || "-/-/-"}
                                 onChange={setFechaSelecionada}
                                 margin="normal"
                                 id="fecha-publicacion-id"
@@ -125,6 +198,7 @@ const NuevoCurso = () => {
                             color="primary"
                             size="large"
                             style={style.submit}
+                            onClick={guardarCursoBotton}
                         >
                             Guardar Curso
                         </Button>

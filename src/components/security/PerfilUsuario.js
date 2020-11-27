@@ -97,22 +97,22 @@ const PerfilUsuario = () => {
                 <form style={style.form} >
                     <Grid container spacing={2} >
                         <Grid item xs={12} md={6}>
-                            <TextField name="nombre" value={usuario.nombre} onChange={ingresarValoresMemoria} variant="outlined" fullWidth label="Ingrese Nombre"/>
+                            <TextField name="nombre" value={usuario.nombre || ""} onChange={ingresarValoresMemoria} variant="outlined" fullWidth label="Ingrese Nombre"/>
                         </Grid>
                         <Grid item xs={12} md={6}>
-                                <TextField name="apellidos" value={usuario.apellidos} onChange={ingresarValoresMemoria} variant="outlined" fullWidth label="Ingrese sus Apellidos"/>
+                                <TextField name="apellidos" value={usuario.apellidos || ""} onChange={ingresarValoresMemoria} variant="outlined" fullWidth label="Ingrese sus Apellidos"/>
                             </Grid>
                         <Grid item xs={12} md={6}>
-                            <TextField name="email" value={usuario.email} onChange={ingresarValoresMemoria} variant="outlined" fullWidth label="Ingrese email"/>
+                            <TextField name="email" value={usuario.email || ""} onChange={ingresarValoresMemoria} variant="outlined" fullWidth label="Ingrese email"/>
                         </Grid>
                         <Grid item xs={12} md={6}>
-                            <TextField name="userName" value={usuario.userName} onChange={ingresarValoresMemoria} variant="outlined" fullWidth label="Ingrese Usename"/>
+                            <TextField name="userName" value={usuario.userName || ""} onChange={ingresarValoresMemoria} variant="outlined" fullWidth label="Ingrese Usename"/>
                         </Grid>
                         <Grid item xs={12} md={6}>
-                            <TextField type="password" value={usuario.password} onChange={ingresarValoresMemoria} name="password" variant="outlined" fullWidth label="Ingrese password"/>
+                            <TextField type="password" value={usuario.password || ""} onChange={ingresarValoresMemoria} name="password" variant="outlined" fullWidth label="Ingrese password"/>
                         </Grid>
                         <Grid item xs={12} md={6}>
-                            <TextField type="password" value={usuario.confirmarPassword} onChange={ingresarValoresMemoria} name="confirmarPassword" variant="outlined" fullWidth label="Confirme password"/>
+                            <TextField type="password" value={usuario.confirmarPassword || ""} onChange={ingresarValoresMemoria} name="confirmarPassword" variant="outlined" fullWidth label="Confirme password"/>
                         </Grid>
                         <Grid item xs={12} md={12}>
                             <ImageUploader withIcon={false}

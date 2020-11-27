@@ -4,9 +4,9 @@ import BarSesion from './bar/BarSesion';
 import { useStateValue } from '../../context/store';
 
 const AppNavBar = () => {
-    const [ {sesionUsuario}, distpach] = useStateValue();
+    const [ {sesionUsuario}/*, distpach*/] = useStateValue();
 
-    return sesionUsuario ? (sesionUsuario.autenticado == true ? 
+    return sesionUsuario ? (sesionUsuario.autenticado === true ? 
         <AppBar position="static">
             <BarSesion />
         </AppBar>

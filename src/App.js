@@ -11,6 +11,7 @@ import { useStateValue } from './context/store';
 import { obtenerUsuarioActual } from './actions/UsuarioAction';
 import RutaSegura from './components/navigation/RutaSegura';
 import NuevoCurso from './components/Cursos/NuevoCurso';
+import PaginadorCurso from './components/Cursos/PaginadorCurso';
 //Router es un enrutador
 //Switch es el que redirige a que componente te estas refierendo
 //Route es la ruta del componente que se va a cargar
@@ -18,7 +19,7 @@ import NuevoCurso from './components/Cursos/NuevoCurso';
 function App() {
     //Referencia a esa data que esta manejando el reducer openSnackBar, referencia a la variable global que almacena el estado
     //del snackBar
-    const [{ sesionUsuario, openSnackBar }, dispatch] = useStateValue();
+    const [{ /*sesionUsuario,*/ openSnackBar }, dispatch] = useStateValue();
 
     const [iniciaApp, setInicialApp] = useState(false);
 
@@ -80,6 +81,12 @@ function App() {
                                 exact
                                 path="/curso/nuevo"
                                 component={NuevoCurso}
+                            />
+
+                            <RutaSegura
+                                exact
+                                path="/curso/paginador"
+                                component={PaginadorCurso}
                             />
                         </Switch>
                     </Grid>
